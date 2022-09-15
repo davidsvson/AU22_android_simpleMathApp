@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var questionTextView : TextView
     lateinit var answerView : EditText
     var correctAnswer : Int = 0
+    var score : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +42,13 @@ class MainActivity : AppCompatActivity() {
     fun handleButtonPress() {
 
         val answeredCorrect = checkAnswer()
+        if (answeredCorrect) {
+            score++
+        }
         Log.d("!!!", "Du svarade $answeredCorrect")
         val intent = Intent(this, AnswerAcitivty::class.java)
         intent.putExtra("answeredCorrect", answeredCorrect)
-
+        intent.putExtra("score", score)
 
         startActivity(intent)
     }
